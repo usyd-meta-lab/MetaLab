@@ -13,6 +13,7 @@
 #'                       All other values are treated as S1.
 #' @param resp_present   Value of *resp* that means “responded signal present”.
 #'                       All other values are treated as S1.
+#' @param K              Number of confidence levels.
 #' @param pad_zero       Constant to add to empty cells (log–linear correction).
 #'                       Set 0 to skip padding.
 #' @param add_constant   Passed through to **metaSDT::fit_meta_d_MLE()**.
@@ -34,18 +35,20 @@
 #'   resp          = "response",
 #'   conf          = "confidence",
 #'   stim_present  = "true",
-#'   resp_present  = "w"
+#'   resp_present  = "w",
+#'   K  = "6"
 #' )
 compute_meta_sdt <- function(data,
                              id            = "participant_id",
                              stim          = "stim",
                              resp          = "resp",
                              conf          = "conf",
-                             stim_present  = "S2",
-                             resp_present  = "S2",
-                             pad_zero      = 0.5,
+                             stim_present  = "S1",
+                             resp_present  = "S1",
+                             K  = 6,
+                             pad_zero      = 0,
                              add_constant  = TRUE) {
-  
+
   ## ----------------------------------------------------------------------
   ## 1.  Re-code to canonical S1 / S2 and ensure confidence is integer
   ## ----------------------------------------------------------------------
@@ -55,41 +58,40 @@ compute_meta_sdt <- function(data,
       .resp = ifelse(.data[[resp]] == resp_present,  "S2", "S1"),
       .conf = as.integer(.data[[conf]])
     )
-  
+
   ## ----------------------------------------------------------------------
   ## 2.  Internal helpers (kept in your original style)
   ## ----------------------------------------------------------------------
   collapse_counts <- function(dsub, stim_label, K) {
-    
+
     ## S1-responses, high → low confidence
     s1_hi_to_lo <- sapply(rev(seq_len(K)), function(c)
       sum(dsub$.stim == stim_label & dsub$.resp == "S1" & dsub$.conf == c))
-    
+
     ## S2-responses, low → high confidence
     s2_lo_to_hi <- sapply(seq_len(K), function(c)
       sum(dsub$.stim == stim_label & dsub$.resp == "S2" & dsub$.conf == c))
-    
+
     c(s1_hi_to_lo, s2_lo_to_hi)          # exactly as in your prototype
   }
-  
+
   safe_counts <- function(x) {
     if (pad_zero > 0 && any(x == 0)) x <- x + pad_zero
     x
   }
-  
+
   ## ----------------------------------------------------------------------
   ## 3.  Per-participant loop
   ## ----------------------------------------------------------------------
   out <- df %>%
     dplyr::group_by(.data[[id]]) %>%
     dplyr::group_map(~{
-      K  <- max(.x$.conf, na.rm = TRUE)
-      
+
       n1 <- safe_counts(collapse_counts(.x, "S1", K))
       n2 <- safe_counts(collapse_counts(.x, "S2", K))
-      
+
       fit <- metaSDT::fit_meta_d_MLE(n1, n2, add_constant = add_constant)
-      
+
       dplyr::tibble(
         !!id := .y[[1]],
         d_prime        = fit$da[1],
@@ -98,6 +100,6 @@ compute_meta_sdt <- function(data,
       )
     }, .keep = TRUE) %>%
     dplyr::bind_rows()
-  
+
   out
 }

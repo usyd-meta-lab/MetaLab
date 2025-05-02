@@ -10,9 +10,10 @@ compute_meta_sdt(
   stim = "stim",
   resp = "resp",
   conf = "conf",
-  stim_present = "S2",
-  resp_present = "S2",
-  pad_zero = 0.5,
+  stim_present = "S1",
+  resp_present = "S1",
+  K = 6,
+  pad_zero = 0,
   add_constant = TRUE
 )
 }
@@ -32,6 +33,8 @@ All other values are treated as S1.}
 
 \item{resp_present}{Value of \emph{resp} that means “responded signal present”.
 All other values are treated as S1.}
+
+\item{K}{Number of confidence levels.}
 
 \item{pad_zero}{Constant to add to empty cells (log–linear correction).
 Set 0 to skip padding.}
@@ -60,6 +63,7 @@ out <- compute_meta_sdt(
   resp          = "response",
   conf          = "confidence",
   stim_present  = "true",
-  resp_present  = "w"
+  resp_present  = "w",
+  K  = "6"
 )
 }
