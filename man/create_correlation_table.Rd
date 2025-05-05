@@ -4,17 +4,20 @@
 \alias{create_correlation_table}
 \title{Create APA-style correlation table with descriptive statistics}
 \usage{
-create_correlation_table(data)
+create_correlation_table(data, file = NULL)
 }
 \arguments{
-\item{data}{A data frame or matrix containing numeric variables. Missing values will be handled using pairwise deletion.}
+\item{data}{A data frame or matrix containing variables. Non-numeric variables are automatically excluded.
+Missing values will be handled using pairwise deletion.}
+
+\item{file}{Optional. If provided, saves the table to a Word document at the specified file path (must end with .docx).}
 }
 \value{
 Invisibly returns the formatted correlation table as a data frame. Also prints a styled table and significance note.
 }
 \description{
 This function computes a correlation matrix with significance stars, along with means and standard deviations,
-and presents the results in an APA-style formatted table.
+and presents the results in an APA-style formatted table. Automatically excludes non-numeric variables.
 }
 \details{
 Correlations are computed using Pearson's r. Significance levels are denoted as follows:
@@ -27,9 +30,10 @@ Correlations are computed using Pearson's r. Significance levels are denoted as 
   my_data <- data.frame(
     var1 = c(1, 2, NA, 4, 5),
     var2 = c(2, 3, 4, NA, 6),
-    var3 = c(3, 4, 5, 6, NA)
+    var3 = c(3, 4, 5, 6, NA),
+    group = c("A", "B", "A", "B", "A")
   )
-  create_correlation_table(my_data)
+  create_correlation_table(my_data, file = "correlation_table.docx")
 }
 
 }
