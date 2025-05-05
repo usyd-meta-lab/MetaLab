@@ -4,12 +4,19 @@
 \alias{combine_osf_csvs}
 \title{Row‑bind every top‑level CSV file in an OSF component}
 \usage{
-combine_osf_csvs(osf_id, pat = Sys.getenv("OSF_PAT"), verbose = TRUE)
+combine_osf_csvs(
+  osf_id,
+  pat = Sys.getenv("OSF_PAT"),
+  folder = NULL,
+  verbose = TRUE
+)
 }
 \arguments{
 \item{osf_id}{5‑character GUID or full OSF URL (e.g. "u28tr").}
 
 \item{pat}{Personal‑access‑token (defaults to Sys.getenv("OSF_PAT")).}
+
+\item{folder}{A folder if you want to keep the raw CSV, if NULL then they are deleted}
 
 \item{verbose}{Print progress messages?  Default = TRUE.}
 }
