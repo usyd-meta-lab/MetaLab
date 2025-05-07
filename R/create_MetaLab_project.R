@@ -129,7 +129,7 @@ create_MetaLab_project <- function(project_name,
       "├── LICENSE                  # Licensing information",
       "├── .gitignore               # Files to ignore in version control",
       "├── experiments/",
-      "│   └── YYYY-MM-DD_example-experiment/",
+      "│   └── example-experiment/",
       "│       ├── design/          # Task design files, protocols",
       "│       ├── stimuli/         # Images, sounds, or other stimuli",
       "│       ├── scripts/         # Code for running the experiment (e.g., jsPsych, MATLAB)",
@@ -145,7 +145,7 @@ create_MetaLab_project <- function(project_name,
       "│       ├── code/            # Shared functions or custom packages for this experiment",
       "│       └── notes.md         # Lab notes or changelog for the experiment",
       "├── manuscripts/",
-      "│   └── YYYY-MM-DD_draft_manuscript.md  # Draft manuscript for the project",
+      "│   └── draft_manuscript.md  # Draft manuscript for the project",
       "├── reports/                 # Internal reports or summaries",
       "├── preregistration/         # Preregistration documents",
       "└── presentations/           # Conference slides, posters, etc.",
@@ -179,7 +179,7 @@ create_MetaLab_project <- function(project_name,
   }
 
   # --- Create manuscript draft ---
-  manuscript_draft <- file.path(root_dir, "manuscripts", paste0(today, "_draft_manuscript.md"))
+  manuscript_draft <- file.path(root_dir, "manuscripts", paste0("_draft_manuscript.md"))
   if (!file.exists(manuscript_draft)) {
     writeLines(c(
       "# Draft Manuscript",
