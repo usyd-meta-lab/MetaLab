@@ -1,2 +1,2 @@
 # MetaLab
-MetaLab R Package
+USYD Meta Lab R Package
