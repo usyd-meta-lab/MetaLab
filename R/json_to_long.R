@@ -14,9 +14,6 @@
 #' df_long <- json_to_long(data, participant_id = "id", response = "response_json")
 #' }
 #'
-#' @import dplyr
-#' @import purrr
-#' @import jsonlite
 #' @export
 json_to_long <- function(data, participant_id = "participant_id", response = "response") {
   # Ensure required packages are available
