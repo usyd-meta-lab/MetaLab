@@ -19,19 +19,27 @@
 #' @import jsonlite
 #' @export
 json_to_long <- function(data, participant_id = "participant_id", response = "response") {
+  # Ensure required packages are available
+  required_packages <- c("dplyr", "purrr", "jsonlite")
+  missing <- required_packages[!sapply(required_packages, requireNamespace, quietly = TRUE)]
   
+  if (length(missing) > 0) {
+    stop("The following packages are required but not installed: ",
+         paste(missing, collapse = ", "), call. = FALSE)
+  }
+
+  # Use fully qualified package functions
   df_long <- data %>%
-    mutate(row = row_number()) %>%
-    group_split(row) %>%
-    map_dfr(~ {
-      self <- .
-      answers <- fromJSON(self[[response]])
-      tibble(
-        participant_id = self[[participant_id]],
+    dplyr::mutate(row = dplyr::row_number()) %>%
+    dplyr::group_split(row) %>%
+    purrr::map_dfr(~{
+      answers <- jsonlite::fromJSON(.x[[response]])
+      dplyr::tibble(
+        participant_id = .x[[participant_id]],
         question = names(answers),
         response = as.numeric(answers)
       )
     })
-  
+
   return(df_long)
 }
