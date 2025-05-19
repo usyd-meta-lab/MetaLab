@@ -2,42 +2,21 @@
 % Please edit documentation in R/calculate_group_descriptives.R
 \name{calculate_group_descriptives}
 \alias{calculate_group_descriptives}
-\title{Calculate Group Descriptives and t-tests}
+\title{Calculate Group Descriptives and t-tests or ANOVA}
 \usage{
 calculate_group_descriptives(data, vars, group_var)
 }
 \arguments{
 \item{data}{A data frame containing the variables to analyse.}
 
-\item{vars}{A character vector of variable names to summarise (e.g., \code{c("age", "height")}).}
+\item{vars}{A character vector of variable names to summarise.}
 
-\item{group_var}{The name of the grouping variable (a factor or character variable).}
+\item{group_var}{The name of the grouping variable.}
 }
 \value{
-A data frame with means (SDs) for each group, the p-value, and the t-statistic for each variable.
+A data frame with group descriptives and statistical test results.
 }
 \description{
 Computes group-wise means, standard deviations, and sample sizes for specified variables.
-Performs independent samples t-tests comparing the groups, and returns a summary table.
-}
-\details{
-\itemize{
-\item Group descriptives are reported as \code{mean (SD)}.
-\item t-tests are Welch's t-tests (default in \code{t.test()}), which do not assume equal variances.
-\item Missing data are handled using pairwise deletion (listwise within each variable).
-}
-}
-\examples{
-\dontrun{
-my_data <- data.frame(
-  group = rep(c("Control", "Treatment"), each = 5),
-  age = c(25, 30, 35, 40, 45, 28, 32, 37, 42, 47),
-  height = c(170, 175, 168, 172, 169, 171, 176, 169, 173, 170),
-  weight = c(70, 75, 68, 73, 71, 72, 77, 70, 75, 73)
-)
-vars_to_analyze <- c("age", "height", "weight")
-results_table <- calculate_group_descriptives(my_data, vars_to_analyze, "group")
-print(results_table)
-}
-
+Performs t-tests or one-way ANOVAs depending on the number of groups.
 }
