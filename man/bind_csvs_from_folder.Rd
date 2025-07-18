@@ -4,10 +4,12 @@
 \alias{bind_csvs_from_folder}
 \title{Bind csvs from folder}
 \usage{
-bind_csvs_from_folder(folder_path)
+bind_csvs_from_folder(folder_path, participant_id = "participant_id")
 }
 \arguments{
 \item{folder_path}{folder path}
+
+\item{participant_id}{ID variable to check for duplicates}
 }
 \value{
 A combined dataframe with all the CSVs'

@@ -7,7 +7,7 @@
 #' @return A tibble containing all rows from every *.csv file, padded with NA
 #'         for missing columns, plus a `.source_file` provenance column.
 #' @export
-combine_osf_csvs <- function(osf_id,
+bind_csvs_from_OSF <- function(osf_id,
                              pat     = Sys.getenv("OSF_PAT"),
                              folder = NULL,
                              verbose = TRUE) {
@@ -41,6 +41,8 @@ combine_osf_csvs <- function(osf_id,
   if (verbose) message("Done – returning ",
                        nrow(out), " rows and ",
                        ncol(out) - 1, " data column(s).")
+
+
   out
 }
 

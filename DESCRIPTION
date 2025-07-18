@@ -16,6 +16,5 @@ Imports:
     kableExtra,
     dplyr,
     flextable
-
 Remotes:
     craddm/metaSDT

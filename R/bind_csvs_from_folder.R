@@ -3,9 +3,10 @@
 #' This function row binds all CSV files from a specified folder
 #'
 #' @param folder_path folder path
+#' @param participant_id ID variable to check for duplicates
 #' @return A combined dataframe with all the CSVs'
 #' @export
-bind_csvs_from_folder <- function(folder_path) {
+bind_csvs_from_folder <- function(folder_path, participant_id = "participant_id") {
   # Check if the folder exists
   if (!dir.exists(folder_path)) {
     stop("The specified folder does not exist")
@@ -62,6 +63,9 @@ bind_csvs_from_folder <- function(folder_path) {
 
   # Add a column indicating source file if needed
   combined_df$source_file <- rep(names(standardized_dfs), sapply(standardized_dfs, nrow))
+
+  # Check if duplicates
+  find_duplicate_attempts(combined_df, id_col = participant_id)
 
   return(combined_df)
 }
