@@ -2,38 +2,61 @@
 % Please edit documentation in R/create_correlation_table.R
 \name{create_correlation_table}
 \alias{create_correlation_table}
-\title{Create APA-style correlation table with descriptive statistics}
+\title{Create APA‐style correlation table with optional embedded thumbnail plots}
 \usage{
-create_correlation_table(data, file = NULL)
+create_correlation_table(
+  data,
+  file = NULL,
+  embed_scatter = FALSE,
+  scatter_triangle = c("lower", "upper"),
+  show_correlations = TRUE,
+  diag_hist = FALSE,
+  show_scatter_labels = TRUE,
+  fit_line_col = NULL,
+  point_col = "grey",
+  label_cex = 1.15,
+  img_size = 0.8,
+  img_dpi = 300,
+  ...
+)
 }
 \arguments{
-\item{data}{A data frame or matrix containing variables. Non-numeric variables are automatically excluded.
-Missing values will be handled using pairwise deletion.}
+\item{data}{Data frame or matrix; non-numeric variables are dropped.}
 
-\item{file}{Optional. If provided, saves the table to a Word document at the specified file path (must end with .docx).}
+\item{file}{Optional .docx path; if provided, writes the Word file.}
+
+\item{embed_scatter}{Logical. If TRUE, embed scatter thumbnails in \code{scatter_triangle}. Default TRUE.}
+
+\item{scatter_triangle}{"lower" or "upper" for where the scatter thumbnails should go. Default "lower".}
+
+\item{show_correlations}{Logical. If TRUE, correlation text is shown on the
+opposite triangle (or on upper if no scatter). Default TRUE.}
+
+\item{diag_hist}{Logical. If TRUE, embed histogram thumbnails on the diagonal. Default TRUE.}
+
+\item{show_scatter_labels}{Logical. If TRUE (default), overlay “r=.XX” + sig stars on scatter thumbnails.}
+
+\item{fit_line_col}{NULL or an R colour. If provided, draw a least-squares line in each scatter.}
+
+\item{point_col}{Colour for scatterplot points. Default "black".}
+
+\item{label_cex}{cex for the “r=.XX\link{***}” label in scatter thumbnails. Default 1.15.}
+
+\item{img_size}{Image size (inches) for thumbnails (square). Default 0.8.}
+
+\item{img_dpi}{DPI for thumbnails. Default 300.}
+
+\item{...}{Passed to png() (e.g., bg = "transparent").}
+
+\item{embed_lower}{(Deprecated) If provided, TRUE behaves like \code{scatter_triangle="lower"} and \code{embed_scatter=TRUE}.}
 }
 \value{
-Invisibly returns the formatted correlation table as a data frame. Also prints a styled table and significance note.
+Invisibly returns the printed correlation table (data.frame).
 }
 \description{
-This function computes a correlation matrix with significance stars, along with means and standard deviations,
-and presents the results in an APA-style formatted table. Automatically excludes non-numeric variables.
-}
-\details{
-Correlations are computed using Pearson's r. Significance levels are denoted as follows:
-\itemize{
-\item p < .05, ** p < .01, *** p < .001. Means and standard deviations are shown in the first column.
-}
-}
-\examples{
-\dontrun{
-  my_data <- data.frame(
-    var1 = c(1, 2, NA, 4, 5),
-    var2 = c(2, 3, 4, NA, 6),
-    var3 = c(3, 4, 5, 6, NA),
-    group = c("A", "B", "A", "B", "A")
-  )
-  create_correlation_table(my_data, file = "correlation_table.docx")
-}
-
+Computes Pearson correlations (pairwise deletion) with significance stars,
+prints an APA-style table, and (optionally) writes a .docx with:
+• scatterplot thumbnails on the chosen triangle (upper/lower),
+• correlation text on the opposite triangle (or hidden), and
+• histograms on the diagonal.
 }
