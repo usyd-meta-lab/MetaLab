@@ -15,6 +15,7 @@ Imports:
     knitr,
     kableExtra,
     dplyr,
-    flextable
+    flextable,
+    officer
 Remotes:
     craddm/metaSDT
