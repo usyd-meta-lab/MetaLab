@@ -1,54 +1,227 @@
+
 ---
-output: github_document
+title: "MetaLab"
+output:
+  github_document: default
 ---
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
+# MetaLab <img alt="USYD Meta Lab" src="https://usyd-meta-lab.github.io/files/usyd.ico" height="28" align="right"/>
 
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  fig.path = "man/figures/README-",
-  out.width = "100%"
-)
-```
+Utility functions for the USYD **Meta Lab** workflow — from running jsPsych studies with DataPipe to pulling, cleaning, and reporting data from **OSF**.
 
-# MetaLab
+- Streamlined data pulls from OSF components
+- JSON → tidy data helpers for jsPsych exports
+- Quick, reproducible reporting utilities (tables/figures)
 
-<!-- badges: start -->
-<!-- badges: end -->
+> Install from GitHub with `devtools::install_github("usyd-meta-lab/MetaLab")`.
 
-The goal of MetaLab is to ...
+---
 
 ## Installation
 
-You can install the development version of MetaLab like so:
-
-``` r
-# FILL THIS IN! HOW CAN PEOPLE INSTALL YOUR DEV PACKAGE?
+```r
+install.packages("devtools")
+devtools::install_github("usyd-meta-lab/MetaLab")
 ```
 
-## Example
+If you’re on a fresh machine, you may need system build tools (Rtools on Windows / Xcode CLT on macOS).
 
-This is a basic example which shows you how to solve a common problem:
+---
 
-```{r example}
+## Quick start
+
+### 1) Download all CSV data from an OSF project
+
+Use this after setting up DataPipe → OSF. It grabs all CSVs in a component (or project) and binds them into a single file.
+
+```r
 library(MetaLab)
-## basic example code
+
+# Pull and combine all CSVs from an OSF project to a local Data/ folder
+combine_osf_csvs(
+  osf_project_id = "YOUR_OSF_ID",  # e.g., "xyztnu"
+  folder = "Data"
+)
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
+### 2) Tidy jsPsych JSON logs
 
-```{r cars}
-summary(cars)
+Turn nested JSON blobs (e.g., embedded in a `json` column or saved as files) into analysis-ready long tables.
+
+```r
+# Example: convert a JSON column to long form
+long <- json_to_long(
+  data = df,              # a data.frame with a JSON column
+  json_col = "json",      # column containing per-trial JSON
+  id_cols = c("pid","timepoint")
+)
 ```
 
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this.
+### 3) Publication-ready correlation table (APA-style)
 
-You can also embed plots, for example:
-
-```{r pressure, echo = FALSE}
-plot(pressure)
+```r
+create_correlation_table(
+  data = df,
+  vars  = c("accuracy", "confidence", "rt"),
+  digits = 2,
+  method = "pearson",
+  caption = "Correlations among key task variables"
+)
 ```
 
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.
+---
+
+## Typical lab workflow
+
+1) **Host** a jsPsych study on GitHub Pages and save data with **DataPipe** → **OSF** (see the lab guide).  
+2) **Pull** all OSF CSVs with `combine_osf_csvs()` into a local `Data/` directory for analysis.  
+3) **Tidy** raw logs with `json_to_long()` and compute derived variables.  
+4) **Report** using `create_correlation_table()` and your standard plotting scripts.
+
+---
+
+## Selected functions
+
+- `combine_osf_csvs(osf_project_id, folder)` – Download & row-bind all CSVs from an OSF project/component.  
+- `json_to_long(data, json_col, id_cols)` – Flatten nested jsPsych JSON into tidy long format.  
+- `create_correlation_table(data, vars, ...)` – APA-style correlation table for manuscripts.
+
+> Tip: When you’re launching a study, note your **OSF Project ID**; you’ll need it for `combine_osf_csvs()`.
+
+---
+
+## Function index (auto-generated on render)
+
+```{r function-index, echo=FALSE, results='asis', message=FALSE, warning=FALSE}
+suppressPackageStartupMessages({
+  library(stringr)
+  library(tools)
+})
+
+# 1) Read exported function names from NAMESPACE
+get_exports <- function(ns_path = "NAMESPACE") {
+  if (!file.exists(ns_path)) return(character(0))
+  lines <- readLines(ns_path, warn = FALSE)
+  # match export(foo) and export("foo")
+  m <- str_match(lines, "^\\s*export\\(([^)]+)\\)")[,2]
+  m <- m[!is.na(m)]
+  m <- gsub("\\s|\"", "", m)
+  sort(unique(m))
+}
+
+# 2) Read titles from man/*.Rd (works on source packages)
+get_titles <- function(exports) {
+  if (!length(exports)) return(setNames(character(0), character(0)))
+  out <- setNames(rep(NA_character_, length(exports)), exports)
+  if (!dir.exists("man")) return(out)
+  rds <- tools::Rd_db(".")
+  for (rd in rds) {
+    tags <- tools:::RdTags(rd)
+    aliases <- tryCatch(unlist(rd[tags == "\\alias"]), error = function(e) character(0))
+    title   <- tryCatch(as.character(rd[tags == "\\title"][[1]]), error = function(e) NA_character_)
+    if (length(aliases)) {
+      for (a in aliases) {
+        a <- as.character(a)
+        if (a %in% names(out) && is.na(out[[a]])) out[[a]] <- title
+      }
+    }
+  }
+  out
+}
+
+# 3) Build a Markdown table
+build_table <- function(exports, titles) {
+  if (!length(exports)) return("_No exported functions found._")
+  header <- "| Function | Title |\n|---|---|"
+  rows <- vapply(exports, function(fn) {
+    ttl <- titles[[fn]]
+    if (is.null(ttl) || is.na(ttl) || ttl == "") ttl <- "—"
+    sprintf("| `%s` | %s |", fn, ttl)
+  }, character(1))
+  paste(c(header, rows), collapse = "\n")
+}
+
+exports <- get_exports()
+get_titles <- function(exports) {
+  if (!length(exports)) return(setNames(character(0), character(0)))
+  out <- setNames(rep(NA_character_, length(exports)), exports)
+  if (!dir.exists("man")) return(out)
+  rds <- tryCatch(tools::Rd_db("."), error = function(e) NULL)
+  if (is.null(rds)) return(out)
+  for (rd in rds) {
+    tags <- tools:::RdTags(rd)
+    aliases <- tryCatch(unlist(rd[tags == "\\alias"]), error = function(e) character(0))
+    title   <- tryCatch(as.character(rd[tags == "\\title"][[1]]), error = function(e) NA_character_)
+    if (length(aliases)) {
+      for (a in aliases) {
+        a <- as.character(a)
+        if (a %in% names(out) && is.na(out[[a]])) out[[a]] <- title
+      }
+    }
+  }
+  out
+}
+titles  <- get_titles(exports)
+cat(build_table(exports, titles))
+```
+
+---
+
+## Minimal example
+
+```r
+library(MetaLab)
+library(dplyr)
+
+# 1) Pull
+combine_osf_csvs("xyztnu", folder = "Data")
+
+# 2) Read & tidy
+raw <- read.csv("Data/all_data.csv")
+long <- json_to_long(raw, json_col = "json", id_cols = c("participant_id"))
+
+# 3) Quick QC
+long %>%
+  count(trial_type) %>%
+  arrange(desc(n))
+
+# 4) Correlations
+create_correlation_table(
+  data = long,
+  vars = c("accuracy","confidence","rt")
+)
+```
+
+---
+
+## Project structure (recommended)
+
+```
+your-project/
+├─ Data/               # created by combine_osf_csvs()
+├─ R/                  # analysis scripts
+├─ figures/            # exported plots
+├─ reports/            # Rmd/Quarto reports
+└─ renv/               # optional: reproducible env
+```
+
+---
+
+## Contributing
+
+- Open an issue with a minimal reproducible example (reprex).
+- Use feature branches; submit a focused PR per feature/fix.
+- Add `@examples` to exported functions and update `NEWS.md` if user-facing.
+
+---
+
+## License
+
+Unless otherwise stated, data you access via the MetaLab platform is typically licensed **CC BY 4.0**; consult the source project for specifics. Package source code license is listed in `DESCRIPTION`.
+
+---
+
+## Links
+
+- Lab package install snippet (website)  
+- Launching studies with DataPipe, OSF, SONA/Prolific (step-by-step)
