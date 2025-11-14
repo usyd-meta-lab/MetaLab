@@ -16,6 +16,11 @@ Imports:
     kableExtra,
     dplyr,
     flextable,
-    officer
+    officer,
+    ggplot2,
+    dplyr,
+    ggbeeswarm,
+    rlang,
+    tidyr
 Remotes:
     craddm/metaSDT
