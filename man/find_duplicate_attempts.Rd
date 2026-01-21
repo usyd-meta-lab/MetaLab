@@ -65,5 +65,5 @@ clean_data <- anti_join(trial_data, dups, by = "participant_id")
 
 }
 \seealso{
-\link{dplyr} for the verbs used under the hood.
+\link[dplyr:dplyr-package]{dplyr::dplyr} for the verbs used under the hood.
 }
