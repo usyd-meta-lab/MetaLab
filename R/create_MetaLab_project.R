@@ -2,9 +2,8 @@
 #'
 #' This function generates a complete directory structure for a new MetaLab project,
 #' including folders for experiments, with nested data, analysis, code, and other subfolders.
-#' It also creates an example experiment folder, template files (README, LICENSE,
-#' analysis plan, manuscript draft), and a data dictionary template in JSON format
-#' within the experiment's data/metadata/ folder.
+#' It also creates an example experiment folder, template files (README, analysis plan),
+#' and a data dictionary template in JSON format within the experiment's data/metadata/ folder.
 #'
 #' @param project_name A string. The name of the project folder to create.
 #' @param experiment_name A string. The short name for the example experiment (default is "example-experiment").
@@ -15,13 +14,10 @@
 #' @details
 #' The directory structure includes:
 #' \itemize{
-#'   \item experiments/YYYY-MM-DD_experiment-name (with design/, stimuli/, scripts/, data/metadata/, analysis/, code/, and notes.md)
-#'   \item manuscripts/YYYY-MM-DD_draft_manuscript.md
-#'   \item reports, preregistration, presentations
-#'   \item README.md, LICENSE, .gitignore
+#'   \item experiments/experiment-name (with preregistration/, design/, stimuli/, scripts/, data/, analysis/, code/, and notes.md)
+#'   \item manuscripts/, reports/, presentations/
+#'   \item README.md, .gitignore
 #' }
-#'
-#' The function automatically stamps the experiment folder and manuscript draft with the current date.
 #'
 #' @examples
 #' \dontrun{
@@ -46,7 +42,6 @@ create_MetaLab_project <- function(project_name,
     "experiments",
     "manuscripts",
     "reports",
-    "preregistration",
     "presentations"
   )
 
@@ -59,6 +54,7 @@ create_MetaLab_project <- function(project_name,
   exp_path <- file.path(root_dir, "experiments", experiment_folder)
 
   exp_subfolders <- c(
+    "preregistration",
     "design",
     "stimuli",
     "scripts",
@@ -126,16 +122,16 @@ create_MetaLab_project <- function(project_name,
       "```plaintext",
       "Project_Name/",
       "├── README.md                # Project overview and folder structure",
-      "├── LICENSE                  # Licensing information",
       "├── .gitignore               # Files to ignore in version control",
       "├── experiments/",
       "│   └── example-experiment/",
+      "│       ├── preregistration/ # Preregistration documents",
       "│       ├── design/          # Task design files, protocols",
       "│       ├── stimuli/         # Images, sounds, or other stimuli",
       "│       ├── scripts/         # Code for running the experiment (e.g., jsPsych, MATLAB)",
       "│       ├── data/",
       "│       │   ├── metadata/    # Data dictionary and metadata files",
-      "│       │   ├── processed/   # Cleaned data ready for analysiss",
+      "│       │   ├── processed/   # Cleaned data ready for analysis",
       "│       │   └── raw/         # Untouched raw data",
       "│       ├── analysis/",
       "│       │   ├── scripts/     # R, Python, MATLAB analysis scripts",
@@ -145,9 +141,7 @@ create_MetaLab_project <- function(project_name,
       "│       ├── code/            # Shared functions or custom packages for this experiment",
       "│       └── notes.md         # Lab notes or changelog for the experiment",
       "├── manuscripts/",
-      "│   └── draft_manuscript.md  # Draft manuscript for the project",
       "├── reports/                 # Internal reports or summaries",
-      "├── preregistration/         # Preregistration documents",
       "└── presentations/           # Conference slides, posters, etc.",
       "```",
       "",
@@ -161,12 +155,6 @@ create_MetaLab_project <- function(project_name,
   }
 
 
-  # --- Add LICENSE ---
-  license_path <- file.path(root_dir, "LICENSE")
-  if (!file.exists(license_path)) {
-    writeLines("Specify your license here (e.g., MIT, CC BY 4.0).", con = license_path)
-  }
-
   # --- Add .gitignore ---
   gitignore_path <- file.path(root_dir, ".gitignore")
   if (!file.exists(gitignore_path)) {
@@ -176,24 +164,6 @@ create_MetaLab_project <- function(project_name,
       "*.RData",
       "*.Rproj.user"
     ), con = gitignore_path)
-  }
-
-  # --- Create manuscript draft ---
-  manuscript_draft <- file.path(root_dir, "manuscripts", paste0("_draft_manuscript.md"))
-  if (!file.exists(manuscript_draft)) {
-    writeLines(c(
-      "# Draft Manuscript",
-      "",
-      "## Abstract",
-      "",
-      "## Introduction",
-      "",
-      "## Methods",
-      "",
-      "## Results",
-      "",
-      "## Discussion"
-    ), con = manuscript_draft)
   }
 
   # --- Add template data dictionary JSON in experiment data/metadata ---
