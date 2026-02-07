@@ -21,6 +21,8 @@ Imports:
     dplyr,
     ggbeeswarm,
     rlang,
-    tidyr
+    tidyr,
+    httr,
+    jsonlite
 Remotes:
     craddm/metaSDT
