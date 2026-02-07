@@ -2,8 +2,8 @@
 #'
 #' Download experiment data from MetaForge (Protocol.js) directly into R.
 #'
-#' @author Protocol.js Team
-#' @version 1.0.0
+#' @name MetaForgeR
+"_PACKAGE"
 
 library(httr)
 library(jsonlite)

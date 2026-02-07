@@ -23,20 +23,16 @@ No return value. Creates folders and files in the specified location.
 \description{
 This function generates a complete directory structure for a new MetaLab project,
 including folders for experiments, with nested data, analysis, code, and other subfolders.
-It also creates an example experiment folder, template files (README, LICENSE,
-analysis plan, manuscript draft), and a data dictionary template in JSON format
-within the experiment's data/metadata/ folder.
+It also creates an example experiment folder, template files (README, analysis plan),
+and a data dictionary template in JSON format within the experiment's data/metadata/ folder.
 }
 \details{
 The directory structure includes:
 \itemize{
-\item experiments/YYYY-MM-DD_experiment-name (with design/, stimuli/, scripts/, data/metadata/, analysis/, code/, and notes.md)
-\item manuscripts/YYYY-MM-DD_draft_manuscript.md
-\item reports, preregistration, presentations
-\item README.md, LICENSE, .gitignore
+\item experiments/experiment-name (with preregistration/, design/, stimuli/, scripts/, data/, analysis/, code/, and notes.md)
+\item manuscripts/, reports/, presentations/
+\item README.md, .gitignore
 }
-
-The function automatically stamps the experiment folder and manuscript draft with the current date.
 }
 \examples{
 \dontrun{
