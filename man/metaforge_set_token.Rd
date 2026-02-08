@@ -6,18 +6,6 @@
 \usage{
 metaforge_set_token(token)
 }
-\arguments{
-\item{token}{Your API token string}
-}
-\value{
-Invisibly returns the token
-}
 \description{
-Store your API token for use in subsequent API calls.
-Get your token from your Profile in MetaForge (metaforge.live).
-}
-\examples{
-\dontrun{
-metaforge_set_token("your-api-token-here")
-}
+Set MetaForge API Token
 }

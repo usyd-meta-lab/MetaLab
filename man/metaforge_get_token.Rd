@@ -6,9 +6,6 @@
 \usage{
 metaforge_get_token()
 }
-\value{
-The stored API token or NULL if not set
-}
 \description{
 Get stored MetaForge API Token
 }

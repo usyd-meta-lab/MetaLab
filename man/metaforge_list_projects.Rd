@@ -6,12 +6,6 @@
 \usage{
 metaforge_list_projects(token = NULL)
 }
-\arguments{
-\item{token}{Optional API token. If not provided, uses stored token.}
-}
-\value{
-A data frame with project IDs, titles, and creation dates
-}
 \description{
-Get a list of all your projects in MetaForge.
+List MetaForge Projects
 }

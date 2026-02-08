@@ -6,14 +6,6 @@
 \usage{
 metaforge_get_data(project_id, token = NULL)
 }
-\arguments{
-\item{project_id}{The project ID (get this from metaforge_list_projects())}
-
-\item{token}{Optional API token. If not provided, uses stored token.}
-}
-\value{
-A data frame containing the experiment data
-}
 \description{
-Download experiment data from a specific project.
+Download MetaForge Project Data
 }
