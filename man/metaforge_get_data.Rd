@@ -17,14 +17,3 @@ A data frame containing the experiment data
 \description{
 Download experiment data from a specific project.
 }
-\examples{
-metaforge_set_token("your-api-token")
-
-# List projects to find the ID
-projects <- metaforge_list_projects()
-print(projects)
-
-# Download data from a specific project
-data <- metaforge_get_data("your-project-id")
-head(data)
-}

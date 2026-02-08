@@ -15,8 +15,3 @@ A data frame with project IDs, titles, and creation dates
 \description{
 Get a list of all your projects in MetaForge.
 }
-\examples{
-metaforge_set_token("your-api-token")
-projects <- metaforge_list_projects()
-print(projects)
-}

@@ -17,5 +17,7 @@ Store your API token for use in subsequent API calls.
 Get your token from your Profile in MetaForge (metaforge.live).
 }
 \examples{
+\dontrun{
 metaforge_set_token("your-api-token-here")
+}
 }

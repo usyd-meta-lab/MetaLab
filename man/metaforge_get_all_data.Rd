@@ -7,23 +7,13 @@
 metaforge_get_all_data(token = NULL, combine = FALSE)
 }
 \arguments{
-\item{token}{Optional API token. If not provided, uses stored token.}
+\item{token}{Optional API token.}
 
-\item{combine}{If TRUE, combines all data into one data frame with a 'project' column.
-If FALSE, returns a named list of data frames.}
+\item{combine}{If TRUE, combines all data into one data frame.}
 }
 \value{
 Either a combined data frame or a named list of data frames
 }
 \description{
-Download data from all your projects at once.
-}
-\examples{
-metaforge_set_token("your-api-token")
-
-# Get all data as separate data frames
-all_data <- metaforge_get_all_data(combine = FALSE)
-
-# Get all data combined
-combined <- metaforge_get_all_data(combine = TRUE)
+Download All MetaForge Project Data
 }
