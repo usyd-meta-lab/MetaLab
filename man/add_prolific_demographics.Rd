@@ -7,8 +7,10 @@
 add_prolific_demographics(
   df,
   api_key,
+  mode = NULL,
   pid_col = "participantId",
-  sid_col = "STUDY_ID"
+  sid_col = "STUDY_ID",
+  session_col = "SESSION_ID"
 )
 }
 \arguments{
