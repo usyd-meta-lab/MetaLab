@@ -1,0 +1,172 @@
+* using log directory ‘/Users/kit/GitHub/MetaLab/MetaLab.Rcheck’
+* using R version 4.4.2 (2024-10-31)
+* using platform: aarch64-apple-darwin20
+* R was compiled by
+    Apple clang version 14.0.0 (clang-1400.0.29.202)
+    GNU Fortran (GCC) 12.2.0
+* running under: macOS 26.4.1
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘MetaLab/DESCRIPTION’ ... OK
+* this is package ‘MetaLab’ version ‘0.0.0.9000’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... WARNING
+Found the following file with a non-portable file name:
+  Meta Measures
+These are not fully portable file names.
+See section ‘Package structure’ in the ‘Writing R Extensions’ manual.
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ‘MetaLab’ can be installed ... WARNING
+Found the following significant warnings:
+  Warning: replacing previous import ‘dplyr::group_rows’ by ‘kableExtra::group_rows’ when loading ‘MetaLab’
+See ‘/Users/kit/GitHub/MetaLab/MetaLab.Rcheck/00install.out’ for details.
+* checking installed package size ... OK
+* checking package directory ... OK
+* checking DESCRIPTION meta-information ... NOTE
+Package listed in more than one of Depends, Imports, Suggests, Enhances:
+  ‘dplyr’
+A package should be listed in only one of these fields.
+* checking top-level files ... OK
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking code files for non-ASCII characters ... WARNING
+Found the following files with non-ASCII characters:
+  R/bind_csvs_from_OSF.R
+  R/create_correlation_table.R
+  R/create_MetaLab_project.R
+  R/find_duplicate_attempts.R
+Portable packages must use only ASCII characters in their R code and
+NAMESPACE directives, except perhaps in comments.
+Use \uxxxx escapes for other characters.
+Function ‘tools::showNonASCIIfile’ can help in finding non-ASCII
+characters in files.
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the package can be unloaded cleanly ... OK
+* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be unloaded cleanly ... OK
+* checking loading without being on the library search path ... OK
+* checking dependencies in R code ... OK
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... NOTE
+add_prolific_demographics : fetch_study_export: no visible global
+  function definition for ‘read.csv’
+bind_csvs_from_folder: no visible global function definition for
+  ‘read.csv’
+calculate_group_descriptives: no visible global function definition for
+  ‘na.omit’
+calculate_group_descriptives : <anonymous>: no visible global function
+  definition for ‘sd’
+calculate_group_descriptives: no visible global function definition for
+  ‘as.formula’
+calculate_group_descriptives: no visible global function definition for
+  ‘t.test’
+calculate_group_descriptives: no visible global function definition for
+  ‘aov’
+calculate_group_descriptives: no visible global function definition for
+  ‘setNames’
+create_correlation_table: no visible binding for global variable ‘sd’
+create_correlation_table : make_scatter: no visible global function
+  definition for ‘par’
+create_correlation_table : make_scatter: no visible global function
+  definition for ‘plot.new’
+create_correlation_table : make_scatter: no visible global function
+  definition for ‘lm’
+create_correlation_table : make_scatter: no visible global function
+  definition for ‘abline’
+create_correlation_table : make_scatter: no visible global function
+  definition for ‘cor’
+create_correlation_table : make_scatter: no visible global function
+  definition for ‘text’
+create_correlation_table : make_hist: no visible global function
+  definition for ‘par’
+create_correlation_table : make_hist: no visible global function
+  definition for ‘plot.new’
+create_correlation_table : make_hist: no visible global function
+  definition for ‘hist’
+find_duplicate_attempts: no visible binding for global variable
+  ‘participant_id’
+find_duplicate_attempts: no visible binding for global variable
+  ‘source_file’
+find_duplicate_attempts: no visible binding for global variable
+  ‘n_files’
+independent_t_test_apa: no visible global function definition for
+  ‘model.frame’
+independent_t_test_apa: no visible global function definition for ‘sd’
+independent_t_test_apa: no visible global function definition for
+  ‘t.test’
+make_dyads_long: no visible binding for global variable ‘sex_label’
+make_dyads_long: no visible global function definition for ‘:=’
+plot_numeric_histograms: no visible global function definition for
+  ‘par’
+plot_numeric_histograms: no visible global function definition for
+  ‘hist’
+rain_plot: no visible binding for global variable ‘sd’
+rain_plot: no visible global function definition for ‘:=’
+rain_plot: no visible binding for global variable ‘.within’
+select_cue_target_sample: no visible global function definition for
+  ‘:=’
+select_cue_target_sample: no visible binding for global variable
+  ‘.cue_nchar’
+select_cue_target_sample: no visible binding for global variable
+  ‘.tgt_nchar’
+select_cue_target_sample: no visible binding for global variable
+  ‘.abs_dev’
+Undefined global functions or variables:
+  := .abs_dev .cue_nchar .tgt_nchar .within abline aov as.formula cor
+  hist lm model.frame n_files na.omit par participant_id plot.new
+  read.csv sd setNames sex_label source_file t.test text
+Consider adding
+  importFrom("graphics", "abline", "hist", "par", "plot.new", "text")
+  importFrom("stats", "aov", "as.formula", "cor", "lm", "model.frame",
+             "na.omit", "sd", "setNames", "t.test")
+  importFrom("utils", "read.csv")
+to your NAMESPACE file.
+* checking Rd files ... OK
+* checking Rd metadata ... OK
+* checking Rd cross-references ... WARNING
+Missing link or links in Rd file 'create_correlation_table.Rd':
+  ‘***’
+
+See section 'Cross-references' in the 'Writing R Extensions' manual.
+* checking for missing documentation entries ... OK
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... WARNING
+Undocumented arguments in Rd file 'add_prolific_demographics.Rd'
+  ‘mode’ ‘session_col’
+
+Documented arguments not in \usage in Rd file 'create_correlation_table.Rd':
+  ‘embed_lower’
+
+Undocumented arguments in Rd file 'metaforge_get_data.Rd'
+  ‘project_id’ ‘token’
+
+Undocumented arguments in Rd file 'metaforge_list_projects.Rd'
+  ‘token’
+
+Undocumented arguments in Rd file 'metaforge_set_token.Rd'
+  ‘token’
+
+Undocumented arguments in Rd file 'select_cue_target_sample.Rd'
+  ‘cue_max_chars’ ‘target_max_chars’
+
+Functions with \usage entries need to have the appropriate \alias
+entries, and all their arguments documented.
+The \usage entries must correspond to syntactically valid R code.
+See chapter ‘Writing R documentation files’ in the ‘Writing R
+Extensions’ manual.
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking examples ... OK
+* DONE
+Status: 5 WARNINGs, 2 NOTEs

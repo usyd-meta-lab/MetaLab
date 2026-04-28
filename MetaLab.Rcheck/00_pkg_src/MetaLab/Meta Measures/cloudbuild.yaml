@@ -1,0 +1,50 @@
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - --no-cache
+      - -t
+      - gcr.io/$PROJECT_ID/meta-measures:$BUILD_ID
+      - -t
+      - gcr.io/$PROJECT_ID/meta-measures:latest
+      - .
+
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - push
+      - --all-tags
+      - gcr.io/$PROJECT_ID/meta-measures
+
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    entrypoint: gcloud
+    args:
+      - run
+      - deploy
+      - meta-measures
+      - --quiet
+      - --image
+      - gcr.io/$PROJECT_ID/meta-measures:latest
+      - --region
+      - us-central1
+      - --platform
+      - managed
+      - --allow-unauthenticated
+      - --port
+      - "8080"
+      - --memory
+      - 512Mi
+      - --cpu
+      - "1"
+      - --min-instances
+      - "0"
+      - --max-instances
+      - "2"
+      - --timeout
+      - "300"
+
+images:
+  - gcr.io/$PROJECT_ID/meta-measures:$BUILD_ID
+  - gcr.io/$PROJECT_ID/meta-measures:latest
+
+options:
+  logging: CLOUD_LOGGING_ONLY

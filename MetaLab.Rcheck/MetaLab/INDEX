@@ -1,0 +1,35 @@
+add_prolific_demographics
+                        Add Prolific demographic data to a data frame
+bind_csvs_from_folder   Bind csvs from folder
+bind_csvs_from_OSF      Row‑bind every top‑level CSV file in an OSF
+                        component
+calculate_group_descriptives
+                        Calculate Group Descriptives and t-tests or
+                        ANOVA
+compute_meta_measures   Compute meta-d' and related metacognitive
+                        measures (Meta Measures)
+create_correlation_table
+                        Create APA‐style correlation table with
+                        optional embedded thumbnail plots
+create_MetaLab_project
+                        Create a standardized MetaLab project directory
+                        structure
+find_duplicate_attempts
+                        Identify participants who uploaded data in more
+                        than one source file
+independent_t_test_apa
+                        Independent Samples t-test with APA Reporting
+json_to_long            Convert JSON responses to long format
+make_dyads_long         Build dyadic data (male–female) from long
+                        records, with optional APIM format
+metaforge_get_data      Download MetaForge Project Data
+metaforge_list_projects
+                        List MetaForge Projects
+metaforge_set_token     Set MetaForge API Token
+plot_numeric_histograms
+                        Plot Histograms for All Numeric Variables
+rain_plot               Raincloud-style plots for between-, within-,
+                        and mixed-design data
+select_cue_target_sample
+                        Select a Random Sample of Cue–Target Pairs by
+                        Approximate Mean FSG

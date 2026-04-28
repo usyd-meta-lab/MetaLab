@@ -1,0 +1,17 @@
+Package: MetaLab
+Title: Package for the USYD Meta Lab
+Version: 0.0.0.9000
+Authors@R: person("Kit", "Double", email = "kit.double@sydney.edu.au", role = c("aut", "cre"))
+Description: Functions we use in the MetaLab.
+License: GPL-3
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3
+Imports: knitr, kableExtra, dplyr, ggplot2, dplyr, ggbeeswarm, rlang,
+        tidyr, httr, jsonlite
+Suggests: Hmisc, flextable, officer
+NeedsCompilation: no
+Packaged: 2026-04-28 02:00:59 UTC; kit
+Author: Kit Double [aut, cre]
+Maintainer: Kit Double <kit.double@sydney.edu.au>
+Built: R 4.4.2; ; 2026-04-28 02:01:05 UTC; unix
