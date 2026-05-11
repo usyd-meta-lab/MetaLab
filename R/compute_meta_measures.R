@@ -24,6 +24,7 @@
 #'   \item `d_prime`, `meta_d_prime`, `M_ratio`, `M_diff`
 #'   \item `delta_conf`, `phi`, `gamma`, `auc2`
 #'   \item `bias`, `abs_accuracy`, `discrimination`, `scatter`
+#'   \item `meta_bias` (mean confidence across all trials, NAs excluded)
 #'   \item `logL`, `note`
 #' }
 #' Values are rounded to match the Shiny app output.
@@ -102,6 +103,7 @@ compute_meta_measures <- function(data,
     abs_accuracy = NA_real_,
     discrimination = NA_real_,
     scatter = NA_real_,
+    meta_bias = NA_real_,
     logL = NA_real_,
     note = note,
     stringsAsFactors = FALSE
@@ -434,6 +436,9 @@ compute_meta_measures <- function(data,
     )
 
     row <- .EMPTY_ROW(pid, if (is.null(fit)) "SDT fit failed" else "")
+
+    conf_vals <- suppressWarnings(as.numeric(as.character(pdata[[conf_col]])))
+    row$meta_bias <- round(mean(conf_vals, na.rm = TRUE), 4)
 
     if (!is.null(simple)) {
       row$delta_conf <- round(simple$delta_conf, 4)

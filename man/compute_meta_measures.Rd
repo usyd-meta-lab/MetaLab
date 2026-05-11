@@ -37,7 +37,8 @@ A data.frame with one row per participant matching the results table produced by
 the Meta Measures Shiny app in this repository. Columns include \code{d_prime},
 \code{meta_d_prime}, \code{M_ratio}, \code{M_diff}, \code{delta_conf},
 \code{phi}, \code{gamma}, \code{auc2}, \code{bias}, \code{abs_accuracy},
-\code{discrimination}, \code{scatter}, \code{logL}, and \code{note}.
+\code{discrimination}, \code{scatter}, \code{meta_bias} (mean confidence
+across all trials, NAs excluded), \code{logL}, and \code{note}.
 }
 \description{
 Computes the same per-participant results table produced by the Meta Measures
